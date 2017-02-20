@@ -57,20 +57,14 @@
 #define S20_BLK_LEN 64
 
 typedef union _s20_blk_t {
-  uint8_t  v8[S20_BLK_LEN];
-  uint16_t v16[S20_BLK_LEN/2];
-  uint32_t v32[S20_BLK_LEN/4];
-  uint64_t v64[S20_BLK_LEN/8];
+  uint8_t  b[S20_BLK_LEN];
+  uint32_t w[S20_BLK_LEN/4];
+  uint64_t q[S20_BLK_LEN/8];
 } s20_blk;
 
 typedef struct _s20_ctx_t {
   s20_blk s;
 } s20_ctx;
-
-#ifdef USE_ASM
-#define s20_setkey(x,y,z) s20_setkeyx(x,y,z)
-#define s20_crypt(x,y,z) s20_cryptx(x,y,z)
-#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -81,8 +75,8 @@ extern "C" {
   void s20_setkeyx(s20_ctx*, void*, void*);
   
   // encrypt or decrypt stream of bytes
-  void s20_crypt(s20_ctx*, void*, uint32_t);
-  void s20_cryptx(s20_ctx*, void*, uint32_t);
+  void s20_encrypt(uint32_t, void*, s20_ctx*);
+  void s20_encryptx(uint32_t, void*, s20_ctx*);
   
 #ifdef __cplusplus
 }

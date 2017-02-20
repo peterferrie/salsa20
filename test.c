@@ -69,9 +69,9 @@ int main(void)
     hex2bin(res, tv_res);
     
     s20_setkey(&c, key, iv);
-    s20_cryptx(&c, strm, sizeof(strm));
+    s20_encrypt(sizeof(strm), strm, &c);
     
-    printf ("\nSalsa20 test - %s\n", 
+    printf ("\nSALSA20 test - %s", 
       equ(strm, res, 64) ? "OK" : "failed");
         
     bin2hex(strm, 64);

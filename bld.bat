@@ -1,6 +1,5 @@
 @echo off
-del *.obj *.bin *.exe
-yasm -fbin -DBIN sx.asm -osx.bin
-yasm -fwin32 sx.asm -osx.obj
-cl /nologo /DUSE_ASM /O2 /Os /GS- test.c sx.obj
+yasm -DBIN -fbin asm\s20x.asm -os20x.bin
+yasm -fwin32 asm\s20x.asm -os20x.obj
+cl /O2 /Os test.c s20.c s20x.obj
 del *.obj
